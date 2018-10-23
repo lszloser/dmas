@@ -1,0 +1,11 @@
+{
+  "stops" : 
+  [
+    { "name" : "Katowice", "population" : "800" }, 
+    { "name" : "Sosnowiec", "population" : "800" },
+    { "name" : "Gliwice", "population" : "750" },
+    { "name" : "Krakow", "population" : "1000" },
+    { "name" : "Warszawa", "population" : "1200" },
+    { "name" : "Kielce", "population" : "300" }
+   ]
+}
