@@ -103,6 +103,7 @@ class Bus {
   loadPeople() {
     if ((this.spaceLeft() <= 0 ) || (this.currentStop.waitingCount <= 0)) {
       this.logData.PeopleNotEntered = this.currentStop.waitingCount;
+      this.currentStop.updateBikersCount();
       this.state = "GO";
       this.log();
     }
