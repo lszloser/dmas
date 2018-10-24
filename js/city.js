@@ -49,8 +49,9 @@ class City {
   }
 
   updateBikersCount() {
-    this.bikersCount += Math.round(0.5 * this.waitingCount);
-    this.waitingCount -= this.bikersCount;
+    let tempBikersCount = Math.round(0.5 * this.waitingCount);
+    this.bikersCount += tempBikersCount;
+    this.waitingCount -= tempBikersCount;
   }
 
   drawVisual() {

@@ -23,7 +23,7 @@ function readSingleFile(e) {
 }
 
 function clearGraph() {
-  gctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+  gctx.fillStyle = 'rgba(255, 255, 255, 1)';
   gctx.fillRect(0,0,graphCanvas.width,graphCanvas.height);
 }
 
