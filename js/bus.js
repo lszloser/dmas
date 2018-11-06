@@ -19,7 +19,6 @@ class Bus {
     this.ctx = gctx.getContext('2d');
     this.img = new Image();
     this.img.src = "assets/bus2.png";
-    this.name = "name";
     this.label = new Label(this.x+10, this.y+20, this.people);
     this.state = "GO";
   }
@@ -94,6 +93,7 @@ class Bus {
     if (this.leaving > 0) {
       this.people--;
       this.leaving--;
+      this.currentStop.updatePopulation(-1);
     }
     else {
       this.state = "LOAD";
@@ -106,11 +106,13 @@ class Bus {
       this.currentStop.updateBikersCount();
       this.state = "GO";
       this.log();
+      this.currentStop.log();
     }
     else {
       this.logData.PeopleEntered++;
       this.people++;
       this.currentStop.waitingCount--;
+      this.currentStop.updatePopulation(1);
     }
   }
 

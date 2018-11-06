@@ -7,6 +7,7 @@ class Simulation {
     this.buses = [];
     this.debug = false;
     this.logs = [];
+    this.globalLogs = [];
     this.stop = false;
     this.logOffsetY = 120;
     this.logOffsetX = 10;
@@ -18,7 +19,7 @@ class Simulation {
     var x = 30;
     var i = 0;
     for (i = 0; i < citiesJSON.length; i++) {
-      this.cities.push(new City(x, 50, citiesJSON[i].name, citiesJSON[i].population))
+      this.cities.push(new City(x, 50, citiesJSON[i].name, citiesJSON[i].population, this))
       x += spacing;
     };
     this.informationLabel.name = this.cities.length;
@@ -71,13 +72,20 @@ class Simulation {
   }
 
   clear() {
-    this.cities=[];
-    this.buses=[];
+    this.cities = [];
+    this.buses = [];
+    this.logs = [];
+    this.stop = false;
+    startAnimating();
   }
   
   update() {
     this.updateCities();
     this.updateBuses();
+  }
+
+  saveData() {
+    return JSON.stringify(this.globalLogs);
   }
 
   log(message) {
@@ -86,6 +94,9 @@ class Simulation {
   }
 
   finish() {
+    this.cities.forEach(function(city) {
+      city.saveLog();
+    });
     this.stop = true;
   }
 

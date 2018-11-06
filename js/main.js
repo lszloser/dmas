@@ -2,6 +2,7 @@
 var graphCanvas = document.getElementById('graphCanvas');
 var gctx = graphCanvas.getContext('2d');
 var resetButton = document.getElementById("resetButton");
+var saveButton = document.getElementById("saveButton");
 var cities = [];
 var G = new Simulation(graphCanvas);
 
@@ -17,9 +18,11 @@ function readSingleFile(e) {
   var reader = new FileReader();
   reader.onload = function(e) {
     cities = JSON.parse(e.target.result);
+    console.log(cities);
     G.updateCitiesList(cities.stops);
   };
   reader.readAsText(file);
+  this.value = null;
 }
 
 function clearGraph() {
@@ -29,8 +32,21 @@ function clearGraph() {
 
 resetButton.addEventListener('click', function(e) {
   //selectedCity = City.select(e);
+  console.log("CLEAR");
   G.clear();
 });
+
+saveButton.addEventListener('click', function(e) {
+  download(G.saveData(), 'json.txt', 'text/plain');
+});
+
+function download(content, fileName, contentType) {
+  var a = document.createElement("a");
+  var file = new Blob([content], {type: contentType});
+  a.href = URL.createObjectURL(file);
+  a.download = fileName;
+  a.click();
+}
 
 graphCanvas.addEventListener('keydown', function(e) {
   var code = e.key;
